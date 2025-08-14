@@ -50,13 +50,5 @@ jobs:
         uses: actions/checkout@v4
       - name: Setup Kubeconfig
         run: echo "${{ secrets.KUBECONFIG }}" > kubeconfig
-      - name: Get port
-        run: PORT_PART=$(kubectl --kubeconfig kubeconfig describe service frontend | grep -i nodeport | awk '{print $3}' | cut -d'/' -f1 | tr -d '[:space:]')
-      - name: Set url
-        run: URL_PART="http://13.62.20.151:/"
-      - name: Combine URL
-        run: RES_URL=$URL_PART$PORT_PART
-      - name: Print URL
-        run: echo $RES_URL
       - name: curl
-        run: scripts/availability-test.sh 
+        run: bash scripts/availability-test.sh 
