@@ -55,6 +55,6 @@ jobs:
       - name: Combine URL
         run: RES_URL=$URL_PART$PORT_PART
       - name: Print URL
-        run: ECHO $RES_URL
+        run: echo $RES_URL
       - name: curl
         run: bash scripts/availability-test.sh $RES_URL
