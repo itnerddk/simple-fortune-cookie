@@ -32,3 +32,8 @@ jobs:
         run: bash ci/build-docker-backend.sh
       - name: push docker
         run: bash ci/push-docker-backend.sh
+  Availability-testing:
+    runs-on: ubuntu-latest
+    steps:
+      - name: curl
+        run: scripts/availability-test.sh http://13.62.20.151:"kubectl describe service frontend | grep -i nodeport | awk '{print $3}' | cut -d'/' -f1"/
