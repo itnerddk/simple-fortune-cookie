@@ -1,0 +1,33 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: database
+  name: database
+spec:
+  selector:
+    matchLabels:
+      app: database
+  template:
+    metadata:
+      labels:
+        app: database
+    spec:
+      volumes:
+        - name: database-pvc
+          persistentVolumeClaim:
+            claimName: database-pvc
+      containers: 
+      - name: data
+        image: redis:8.2.0
+        resources:
+          requests:
+            cpu: "200m"
+            memory: "128Mi"
+        volumeMounts:
+            - name: database-pvc
+              mountPath: /data
+              subPath: database
+        ports:
+        - containerPort: 6379
