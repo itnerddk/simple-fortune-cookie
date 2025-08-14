@@ -1,0 +1,49 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: frontend
+  name: frontend
+spec:
+  selector:
+    matchLabels:
+      app: frontend
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers: 
+      - name: frontend
+        image: ghcr.io/itnerddk/simple-fortune-cookie-frontend:latest
+        resources:
+          requests:
+            cpu: "200m"
+            memory: "128Mi"
+        ports:
+        - containerPort: 8080
+
+        env:
+        - name: BACKEND_DNS
+          value: backend-service.student-8.svc.cluster.local
+        - name: BACKEND_PORT
+          value: "9000"
+
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 8080
+          initialDelaySeconds: 90
+          timeoutSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /healthz
+            port: 8080
+          initialDelaySeconds: 30
+          timeoutSeconds: 10 
