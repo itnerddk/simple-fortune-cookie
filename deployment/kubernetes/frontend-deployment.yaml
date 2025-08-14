@@ -21,18 +21,19 @@ spec:
     spec:
       containers: 
       - name: frontend
-        image: itnerddk/simple-fortune-cookie-frontend:latest # Change this when image is up
+        image: ghcr.io/itnerddk/simple-fortune-cookie-frontend:latest
         resources:
           requests:
-            cpu: "128Mi"
-            memory: "500m"
+            cpu: "200m"
+            memory: "128Mi"
         ports:
         - containerPort: 8080
+
         env:
         - name: BACKEND_DNS
           value: backend-service.student-8.svc.cluster.local
         - name: BACKEND_PORT
-          value: 9000
+          value: "9000"
 
         livenessProbe:
           httpGet:
@@ -46,6 +47,3 @@ spec:
             port: 8080
           initialDelaySeconds: 30
           timeoutSeconds: 10 
-
-      restartPolicy: Always
-      imagePullPolicy: Always

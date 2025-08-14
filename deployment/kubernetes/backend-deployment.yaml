@@ -21,12 +21,10 @@ spec:
     spec:
       containers: 
       - name: backend
-        image: itnerddk/simple-fortune-cookie-backend:latest # Change this when image is up
+        image: ghcr.io/itnerddk/simple-fortune-cookie-backend:latest
         resources:
           requests:
-            cpu: "128Mi"
-            memory: "500m"
+            cpu: "200m"
+            memory: "128Mi"
         ports:
         - containerPort: 9000
-      restartPolicy: Always
-      imagePullPolicy: Always
