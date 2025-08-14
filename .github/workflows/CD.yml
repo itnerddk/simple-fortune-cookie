@@ -57,4 +57,4 @@ jobs:
       - name: Print URL
         run: echo $RES_URL
       - name: curl
-        run: bash scripts/availability-test.sh $RES_URL
+        run: scripts/availability-test.sh 
