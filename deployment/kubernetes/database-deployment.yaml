@@ -15,7 +15,7 @@ spec:
         app: database
     spec:
       volumes:
-        - name: database-pvc # name we can reference below in container
+        - name: database-pvc
           persistentVolumeClaim:
             claimName: database-pvc
       containers: 
