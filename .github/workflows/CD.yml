@@ -49,4 +49,4 @@ jobs:
       - name: Setup Kubeconfig
         run: echo "${{ secrets.KUBECONFIG }}" > kubeconfig
       - name: curl
-        run: scripts/availability-test.sh http://13.62.20.151:$(kubectl describe service frontend | grep -i nodeport | awk '{print $3}' | cut -d'/' -f1)/
+        run: scripts/availability-test.sh 

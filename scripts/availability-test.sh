@@ -1,8 +1,9 @@
 set -euo pipefail
-URL="${1:?usage: $0 <url>}"
+PORT=$(kubectl --kubeconfig kubeconfig describe service frontend | grep -i nodeport | awk '{print $3}' | cut -d'/' -f1 | tr -d '[:space:]')
+URL='http://13.62.20.151:'
 
-echo "$URL"
+URL_COMB=$URL$PORT
 
-curl -fsS --max-time 5 "$URL"
+curl -fsS --max-time 5 "$URL_COMB" >/dev/null
 
-echo "Works: "$URL" is available"
+echo "Works: "$URL_COMB" is available"
