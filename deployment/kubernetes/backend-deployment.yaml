@@ -28,3 +28,6 @@ spec:
             memory: "128Mi"
         ports:
         - containerPort: 9000
+        env:
+        - name: REDIS_DNS
+          value: database-service.student-8.svc.cluster.local
