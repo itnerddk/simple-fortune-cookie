@@ -48,6 +48,8 @@ jobs:
     steps:
       - name: Setup Kubeconfig
         run: echo "${{ secrets.KUBECONFIG }}" > kubeconfig
+      - name: Get path
+        run: pwd
       - name: Get port
         run: PORT_PART=$(kubectl --kubeconfig kubeconfig describe service frontend | grep -i nodeport | awk '{print $3}' | cut -d'/' -f1 | tr -d '[:space:]')
       - name: Set url
