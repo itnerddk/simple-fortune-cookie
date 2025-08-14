@@ -48,7 +48,5 @@ jobs:
     steps:
       - name: Setup Kubeconfig
         run: echo "${{ secrets.KUBECONFIG }}" > kubeconfig
-      - name: cat port
-        run: kubectl --kubeconfig kubeconfig describe service frontend | grep -i nodeport | awk '{print $3}' | cut -d'/' -f1
       - name: curl
-        run: bash scripts/availability-test.sh http://13.62.20.151:$(kubectl --kubeconfig kubeconfig describe service frontend | grep -i nodeport | awk '{print $3}' | cut -d'/' -f1)/
+        run: bash scripts/availability-test.sh http://13.62.20.151:$(kubectl --kubeconfig kubeconfig describe service frontend | grep -i nodeport | awk '{print $3}' | cut -d'/' -f1 | tr -d '[:space:]')/
