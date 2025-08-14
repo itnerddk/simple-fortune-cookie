@@ -5,7 +5,7 @@ on:
     branches: main    
 
 env:
-  docker_username: itnerddk
+  docker_username: ${{ secrets.DOCKER_USERNAME }}
   docker_password: ${{ secrets.GITHUB_TOKEN }}
   GIT_COMMIT: ${{ github.sha }}
 
